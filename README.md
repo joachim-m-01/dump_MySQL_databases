@@ -15,10 +15,15 @@ Script permettant de faire des dumps de base de données MySQL.
 ## Utilisation & Arguments
 
 `-a`: Permet à l'utilisateur de dump toutes les bases de données MySQL s'appuie sur l'argument `mysqldump --all-databases`
+
 `-c`: Permet de créer une archive des bases de données récemment dump
+
 `-h`: Montre l'aide du script
+
 `-n`: Dump une BDD en particulier, nécéssite un argument exemple `./dump_dbb.sh -n DBNAME`
+
 `-o`: Dump uniquement les bases de données créé par l'administrateur.
+
 `-z`: Dump toutes les bdd et les archives en `tar.xz`
 
 - La variable `MYSQL_ROOT_PASS` doit être complété afin que le script fonctionne
