@@ -53,7 +53,7 @@ function dump_all_user_created_db() {
 DB=$(mysql -u${MYSQL_ROOT_LOGIN} -p${MYSQL_ROOT_PASS} -e 'show databases;'| grep -Ev "(Database|information_schema|mysql|performance_schema|sys)")
   for dbname in $DB
   do
-    ${MYSQL_BIN} ${MYSQL_CMD} --databases $dbname > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_'${dbname}${MYSQL_EXT} || echo -e "$RD DUMP KO " >> $SRV_LOG
+    ${MYSQL_BIN} ${MYSQL_CMD} --single-transaction --databases $dbname > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_'${dbname}${MYSQL_EXT} || echo -e "$RD DUMP KO " >> $SRV_LOG
     echo -e "$GR $dbname has been dump ! ${RST}" | awk '{ print strftime("%H:%M:%S"), $0; }' >> $SRV_LOG
   done
 }
@@ -65,7 +65,7 @@ function dump_individual() {
     exit 5
   else
     # Dump de la base de données
-    ${MYSQL_BIN} ${MYSQL_CMD} --databases "$INDIVIDUAL_DUMP" > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_'${INDIVIDUAL_DUMP}${MYSQL_EXT}
+    ${MYSQL_BIN} ${MYSQL_CMD} --single-transaction --databases "$INDIVIDUAL_DUMP" > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_'${INDIVIDUAL_DUMP}${MYSQL_EXT}
   fi
 
   if [[ $? -ne '0' ]]; then
@@ -82,7 +82,7 @@ function dump_all() {
   echo -e "$YL MYSQLDUMP has been launched !!"
     for dbname in $DB
       do
-        ${MYSQL_BIN} ${MYSQL_CMD} --all-databases > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_all'${MYSQL_EXT}
+        ${MYSQL_BIN} ${MYSQL_CMD} --single-transaction --all-databases > ${MYSQL_DUMP_FOLDER}/${SRV_TIME}'_'${SRV_HOSTNAME}'_all'${MYSQL_EXT}
         echo -e "$GR $dbname has been dump ! ${RST} " | awk '{ print strftime("%H:%M:%S"), $0; }' > $SRV_LOG || echo -e "$RD Dump KO "${RST} >> $SRV_LOG
       done
 }
