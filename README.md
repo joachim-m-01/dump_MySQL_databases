@@ -1,8 +1,8 @@
 **Table des matières**
 - [Script dump base de données MySQL](#script-dump-base-de-donn-es-mysql)
   * [Introduction](#introduction)
-  * [Utilisation & Arguments](#utilisation---arguments)
-  * [Amélioration à venir](#am-lioration---venir)
+  * [Utilisation & Arguments](#utilisation-arguments)
+  * [Amélioration à venir](#amélioration-venir)
   * [Codes erreurs](#codes-erreurs)
 
 # Script dump base de données MySQL
